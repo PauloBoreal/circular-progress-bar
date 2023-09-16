@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Circular Progress Bar</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Graduate&family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@100;300;400;500&display=swap');
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body{
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #7d2ae8;
+        }
+
+        .container{
+            width: 420px;
+            padding: 50px 0;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            gap: 30px;
+            background-color: #fff;
+            border-radius: 8px;
+        }
+
+        .circular-progress{
+            width: 250px;
+            height: 250px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: conic-gradient(#7d2ae8 3.6deg, #ededed 0deg);
+            border-radius: 50%;
+        }
+
+        .circular-progress::before{
+            content: "";
+            width: 210px;
+            height: 210px;
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+        }
+
+        .progress-value{
+            position: relative;
+            font-size: 50px;
+            font-weight: 600;
+            color: #7d2ae8;
+        }
+
+        .text{
+            font-size: 30px;
+            font-weight: 500;
+            color: #606060;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="circular-progress">
+            <span class="progress-value">0%</span>
+        </div>
+
+        <span class="text">HTML & CSS</span>
+    </div>
+
+    <script>
+        let circularProgress = document.querySelector(".circular-progress")
+        let progressValue = document.querySelector(".progress-value")
+
+        let progressStartValue = 0
+        let progressEndValue = 100
+        let speed = 10
+
+        let progress = setInterval(() => {
+            progressStartValue++
+            progressValue.textContent = `${progressStartValue}%`
+            circularProgress.style.background = `conic-gradient(#7d2ae8 ${progressStartValue * 3.6}deg, #ededed 0deg)`
+
+            if(progressStartValue == progressEndValue){
+                clearInterval(progress)
+            }
+        }, speed)
+    </script>
+</body>
+</html>
